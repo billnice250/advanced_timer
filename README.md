@@ -14,50 +14,50 @@ Advanced Timer is a Go package that provides a multi-thread safe wrapper around 
 
 # Limitations
 - The remaining time has a margin of error of around 30 milliseconds.
-- The finished event is only guaranteed to be fired within 1 nanosecond of the timer being stopped. (lowest allowed sleep time IN GO)
+- The finished event is only guaranteed to be fired within 100 microseconds of the timer being stopped.
 
 # Usage
 ## Create a new timer
 ```go
-maxDuration := 10 * time.Second
-timer := NewAdvancedTimer(maxDuration)
+	maxDuration := 10 * time.Second
+	timer := NewAdvancedTimer(maxDuration)
 ```
 ## Start the timer
 ```go
-timer.Start()
+	timer.Start()
 ```
 ## Pause the timer
 ```go
-timer.Pause()
+	timer.Pause()
 ```
 ## Resume the timer
 ```go
-timer.Resume()
+	imer.Resume()
 ```
 ## Stop the timer
 ```go
-timer.Stop()
+	timer.Stop()
 ```
 ## Get the remaining time
 ```go
-remaining := timer.Remaining
+	remaining := timer.Remaining
 ```
 ## Get the maximum duration
 ```go
-maxDuration := timer.MaxDuration
+	axDuration := timer.MaxDuration
 ```
 
 ## Check if the timer is paused
 ```go
-paused := timer.Paused
+	paused := timer.Paused
 ```
 ## Wait for the timer to finish
 ```go
-<-timer.Finished
+	<-timer.IsFinished()
 ```
 ## Get the time the timer was started
 ```go
-startedAt := timer.StartedAt
+	startedAt := timer.StartedAt
 ```
 ## Get a string representation of the timer
 ```go
@@ -95,7 +95,7 @@ func main() {
 
 	fmt.Println(timer.Stringfy())
 
-	<-timer.Finished
+	<-timer.IsFinished()
 
 	fmt.Println(timer.Stringfy())
 }
